@@ -14,33 +14,17 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ title, text, onClick, customStyles }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const defaultStyles = {
-    close: {
-      position: 'absolute',
-      top: '6px',
-      right: '16px',
-      fontSize: '1.5rem',
-      cursor: 'pointer',
-    },
-  };
-
-  const mergedStyles = {
-    modal: {...customStyles?.modal},
-    content: {...customStyles?.content, position: 'relative'},
-    close: {...defaultStyles.close, ...customStyles?.close},
-  };
-
   return (
     <div
       className="modal"
-      style={mergedStyles.modal}
+      style={customStyles.modal}
       ref={modalRef}>
       <div
         className="modal-content"
-        style={mergedStyles.content}>
+        style={customStyles.content}>
         <span
           className="close"
-          style={mergedStyles.close}
+          style={customStyles.close}
           onClick={onClick}
         >
           &times;
