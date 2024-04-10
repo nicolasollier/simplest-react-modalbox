@@ -9,22 +9,28 @@ interface ModalProps {
     content?: React.CSSProperties;
     close?: React.CSSProperties;
   };
+  isOpen: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ title, text, onClick, customStyles }) => {
+const Modal: React.FC<ModalProps> = ({ title, text, onClick, customStyles, isOpen }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
       className="modal"
-      style={customStyles.modal}
-      ref={modalRef}>
+      style={{
+        ...customStyles?.modal,
+        display: isOpen ? 'block' : 'none',
+      }}
+      ref={modalRef}
+    >
       <div
         className="modal-content"
-        style={customStyles.content}>
+        style={customStyles?.content}
+      >
         <span
           className="close"
-          style={customStyles.close}
+          style={customStyles?.close}
           onClick={onClick}
         >
           &times;
