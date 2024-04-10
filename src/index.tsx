@@ -3,70 +3,76 @@ import React, { useRef } from 'react';
 interface ModalProps {
   title: string;
   text: string;
-  status: 'success' | 'error' | 'warning' | 'info';
   onClick: () => void;
+  customStyles?: {
+    modal?: React.CSSProperties;
+    content?: React.CSSProperties;
+    close?: React.CSSProperties;
+  };
 }
 
-const Modal: React.FC<ModalProps> = ({ title, text, status, onClick }) => {
+const Modal: React.FC<ModalProps> = ({ title, text, onClick, customStyles }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'success':
-        return '#5cb85c';
-      case 'error':
-        return '#d9534f';
-      case 'warning':
-        return '#f0ad4e';
-      case 'info':
-        return '#5bc0de';
-      default:
-        return '#333';
-    }
+  const defaultStyles = {
+    modal: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    },
+    content: {
+      position: 'relative',
+      width: '60%',
+      maxWidth: '500px',
+      padding: '20px',
+      borderRadius: '5px',
+      border: '2px solid',
+      backgroundColor: 'white',
+      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.3)',
+    },
+    close: {
+      position: 'absolute',
+      top: '6px',
+      right: '16px',
+      fontSize: '1.5rem',
+      cursor: 'pointer',
+    },
+  };
+
+  const mergedStyles = {
+    modal: { ...defaultStyles.modal, ...(customStyles?.modal || {}) },
+    content: { ...defaultStyles.content, ...(customStyles?.content || {}) },
+    close: { ...defaultStyles.close, ...(customStyles?.close || {}) },
   };
 
   return (
-    <div className="modal" style={{ ...styles.modal, backgroundColor: getStatusColor(status) }} ref={modalRef}>
-      <div className="modal-content" style={styles.content}>
-        <span className="close" style={styles.close} onClick={onClick}>
+    <div
+      className="modal"
+      style={mergedStyles.modal}
+      ref={modalRef}>
+      <div
+        className="modal-content"
+        style={mergedStyles.content}>
+        <span
+          className="close"
+          style={mergedStyles.close}
+          onClick={onClick}
+        >
           &times;
         </span>
         <div>
-          <h2 style={{ color: getStatusColor(status) }}>{title}</h2>
+          <h2>{title}</h2>
           <p>{text}</p>
         </div>
       </div>
     </div>
   );
-};
-
-const styles = {
-  modal: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100vw',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  content: {
-    position: 'relative',
-    width: '60%',
-    maxWidth: '500px',
-    padding: '20px',
-    backgroundColor: 'white',
-    borderRadius: '5px',
-    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.3)',
-  },
-  close: {
-    position: 'absolute',
-    top: '8px',
-    right: '8px',
-    fontSize: '1.5rem',
-    cursor: 'pointer',
-  },
 };
 
 export default Modal;
