@@ -3,26 +3,36 @@ import React, { useRef } from 'react';
 interface ModalProps {
   title: string;
   text: string;
-  status: string;
+  status: 'success' | 'error' | 'warning' | 'info';
+  onClick: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ title, text, status }) => {
+const Modal: React.FC<ModalProps> = ({ title, text, status, onClick }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const closeModal = () => {
-    if (modalRef.current) {
-      modalRef.current.style.display = 'none';
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'success':
+        return '#5cb85c';
+      case 'error':
+        return '#d9534f';
+      case 'warning':
+        return '#f0ad4e';
+      case 'info':
+        return '#5bc0de';
+      default:
+        return '#333';
     }
   };
 
   return (
-    <div className="modal" style={styles.modal} ref={modalRef}>
+    <div className="modal" style={{ ...styles.modal, backgroundColor: getStatusColor(status) }} ref={modalRef}>
       <div className="modal-content" style={styles.content}>
-        <span className="close" style={styles.close} onClick={closeModal}>
+        <span className="close" style={styles.close} onClick={onClick}>
           &times;
         </span>
         <div>
-          <h2>{title}</h2>
+          <h2 style={{ color: getStatusColor(status) }}>{title}</h2>
           <p>{text}</p>
         </div>
       </div>
@@ -37,7 +47,6 @@ const styles = {
     left: 0,
     width: '100vw',
     height: '100vh',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
