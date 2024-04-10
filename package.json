@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "simplest-react-modalbox",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "The simplest modal in React published for a school project.",
   "main": "dist/index.cjs",
   "scripts": {

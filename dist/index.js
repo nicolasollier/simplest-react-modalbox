@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-const Modal = ({ title, text, onClick, customStyles, isOpen }) => {
+const Modal = ({ title, text, isOpen, onClick, customStyles }) => {
     const modalRef = useRef(null);
     return (React.createElement("div", { className: "modal", style: Object.assign(Object.assign({}, customStyles === null || customStyles === void 0 ? void 0 : customStyles.modal), { display: isOpen ? 'block' : 'none' }), ref: modalRef },
         React.createElement("div", { className: "modal-content", style: customStyles === null || customStyles === void 0 ? void 0 : customStyles.content },

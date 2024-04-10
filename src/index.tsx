@@ -3,16 +3,16 @@ import React, { useRef } from 'react';
 interface ModalProps {
   title: string;
   text: string;
+  isOpen: boolean;
   onClick: () => void;
   customStyles?: {
     modal?: React.CSSProperties;
     content?: React.CSSProperties;
     close?: React.CSSProperties;
   };
-  isOpen: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ title, text, onClick, customStyles, isOpen }) => {
+const Modal: React.FC<ModalProps> = ({ title, text, isOpen, onClick, customStyles }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   return (
