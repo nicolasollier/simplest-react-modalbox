@@ -1,12 +1,13 @@
 {
+  "type": "module",
   "name": "simplest-react-modalbox",
   "version": "1.0.0",
   "description": "The simpliest modal in React published for a school project.",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
-    "dev": "concurrently \"tsc --watch\" \"nodemon ./dist/index.js\"",
+    "dev": "concurrently \"tsc --watch\" \"nodemon ./dist/index.cjs\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm test"
   },

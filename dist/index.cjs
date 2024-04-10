@@ -1,6 +1,9 @@
-import React, { useRef } from 'react';
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var React = require('react');
+
 const Modal = ({ title, text, status }) => {
-    const modalRef = useRef(null);
+    const modalRef = React.useRef(null);
     const closeModal = () => {
         if (modalRef.current) {
             modalRef.current.style.display = 'none';
@@ -42,5 +45,6 @@ const styles = {
         cursor: 'pointer',
     },
 };
-export default Modal;
-//# sourceMappingURL=index.js.map
+
+exports.default = Modal;
+//# sourceMappingURL=index.cjs.map
