@@ -3,7 +3,6 @@ interface ModalProps {
     title: string;
     text: string;
     isOpen: boolean;
-    onClick: () => void;
     customStyles?: {
         modal?: React.CSSProperties;
         content?: React.CSSProperties;

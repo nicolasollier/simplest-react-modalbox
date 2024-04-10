@@ -4,7 +4,6 @@ interface ModalProps {
   title: string;
   text: string;
   isOpen: boolean;
-  onClick: () => void;
   customStyles?: {
     modal?: React.CSSProperties;
     content?: React.CSSProperties;
@@ -12,8 +11,14 @@ interface ModalProps {
   };
 }
 
-const Modal: React.FC<ModalProps> = ({ title, text, isOpen, onClick, customStyles }) => {
+const Modal: React.FC<ModalProps> = ({ title, text, isOpen, customStyles }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const closeModal = () => {
+    if (modalRef.current) {
+      modalRef.current.style.display = 'none';
+    }
+  }
 
   return (
     <div
@@ -31,7 +36,7 @@ const Modal: React.FC<ModalProps> = ({ title, text, isOpen, onClick, customStyle
         <span
           className="close"
           style={customStyles?.close}
-          onClick={onClick}
+          onClick={closeModal}
         >
           &times;
         </span>
